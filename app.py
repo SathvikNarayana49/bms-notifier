@@ -13,6 +13,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 import sys
 import io
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 # Fix encoding
 if sys.platform == "win32":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
@@ -24,8 +29,8 @@ CORS(app)
 active_monitors = {}
 
 # Your Gmail credentials for sending notifications
-SENDER_EMAIL = "sathviknarayana49@gmail.com"
-SENDER_PASSWORD = "ubxzqtnptksgsyqz"
+SENDER_EMAIL = os.getenv("SENDER_EMAIL")
+SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")
 
 class TicketMonitor:
     def __init__(self, user_email, city, movie_name, date, theater_name, monitor_id):
